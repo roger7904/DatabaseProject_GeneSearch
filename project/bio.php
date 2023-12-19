@@ -32,7 +32,11 @@ $link = mysqli_connect(
     'roger',       // 使用者名稱 
     'aZxcv7904',  // 密碼
     'roger');  // 預設使用的資料庫名稱
-    $bio=$_POST["bio"];
+    
+    //$bio=$_POST["bio"];
+    //[20231219] 
+    $bio = isset($_POST["bio"]) ? $_POST["bio"] : null;
+    
     echo "<div class='tablee'>";
     if ($bio=='protein') {
         $SQL="SELECT BioGRID_Interaction_ID,Author,Pubmed_ID FROM protein";

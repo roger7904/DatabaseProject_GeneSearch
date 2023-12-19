@@ -31,10 +31,18 @@ $link = mysqli_connect(
     'roger',       // 使用者名稱 
     'aZxcv7904',  // 密碼
     'roger');  // 預設使用的資料庫名稱
+/*
 $target=$_POST["target"];
 $mrna=$_POST["mrna"];
 $exon=$_POST["exon"];
 $insert=$_POST["insert"];
+*/
+//[20231219] 
+$target = isset($_POST["target"]) ? $_POST["target"] : null;
+$mrna = isset($_POST["mrna"]) ? $_POST["mrna"] : null;
+$exon = isset($_POST["exon"]) ? $_POST["exon"] : null;
+$insert = isset($_POST["insert"]) ? $_POST["insert"] : null;
+
     if (isset($target)) {
         $SQLCreate="INSERT into test(test) VALUES('$target')";
         $insertresult = mysqli_query($link, $SQLCreate); 
@@ -59,13 +67,17 @@ echo "<select distinct name='chrom' class='option'>";
 $chromsql="select distinct chrom from gene order by chrom ";
     if ( $result = mysqli_query($link, $chromsql) ) {
         while( $row = mysqli_fetch_assoc($result) ){
-            echo "<option value='$row[chrom]'>".$row[chrom]."</option>"."<br/>";
+            //[20231219] 
+            echo "<option value='{$row['chrom']}'>".$row['chrom']."</option>"."<br/>";
         }
     }
 echo "</select>";
 echo "<input type=".'submit'.">";
 echo "</form>";
-$chrom=$_GET["chrom"];
+//$chrom=$_GET["chrom"];
+//[20231219] 
+$chrom = isset($_GET["chrom"]) ? $_GET["chrom"] : null;
+
 if(isset($chrom)){
 echo "<span class='chrop'>Chromosome:<font color=blue)>".$chrom."</font></span><br/>";
 echo "<form  method=".'GET'.">";
@@ -74,7 +86,8 @@ echo "<select name='genename2' class='option'>";
 $sql="select name2 from gene where tName='$chrom'";
     if ( $result = mysqli_query($link, $sql) ) {
         while( $row = mysqli_fetch_assoc($result) ){
-            echo "<option value='$row[name2]'>".$row[name2]."</option>"."<br/>";
+            //[20231219] 
+            echo "<option value='{$row['name2']}'>".$row['name2']."</option>"."<br/>";
         }
     }
 echo "</select>";
@@ -83,7 +96,10 @@ echo "</form>";
 echo "</nav>";
 }
 echo "<div class='tableee'>";
-$name2=$_GET["genename2"];
+//$name2=$_GET["genename2"];
+//[20231219] 
+$name2 = isset($_GET["genename2"]) ? $_GET["genename2"] : null;
+
 $dbdb="select test from test";
 if ( $result2 = mysqli_query($link, $dbdb) ) {
      $row2 = mysqli_fetch_assoc($result2); 
