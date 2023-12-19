@@ -41,6 +41,10 @@
 </div>
 <?php
     $link = @mysqli_connect('localhost','roger', 'aZxcv7904','roger');
+    // 檢查連接是否成功
+    if (!$link) {
+        die('Connect Error: ' . mysqli_connect_error());
+    }
     $SQLDelete="DELETE  FROM test ";
     $result = mysqli_query($link, $SQLDelete);
 

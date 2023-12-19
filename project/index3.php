@@ -40,7 +40,10 @@
                         'roger',       // 使用者名稱 
                         'aZxcv7904',  // 密碼
                         'roger');  // 預設使用的資料庫名稱
-                    $name2=$_GET["geneguery"];
+                    //$name2=$_GET["geneguery"];
+                    //[20231219] 
+                    $name2 = isset($_GET["geneguery"]) ? $_GET["geneguery"] : null;
+                    
                     if(isset($name2)){
                         $SQL="SELECT g.name2,g.chrom,g.name,t.txStart,t.txEnd,t.qName,m.cdsStart FROM gene g inner join transcript t on g.chrom=t.chrom and g.bin=t.bin and g.name=t.name and g.txStart=t.txStart inner join mrna m on t.qName=m.qName WHERE g.name2='$name2'";
                         echo "<div class='tableee'>";
